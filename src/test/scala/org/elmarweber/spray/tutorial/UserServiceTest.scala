@@ -9,12 +9,14 @@ class UserServiceTest extends Specification with Specs2RouteTest {
   "User Service" should {
     "list users" in new DefaultContext {
       Get("/user/") ~> userRoute ~> check {
-        responseAs[String] mustEqual "OK"
+        responseAs[String] mustEqual "[]"
       }
     }
   }
 
-  trait DefaultContext extends Scope with UserService {
+  trait DefaultContext extends MongoContext with UserService {
     override val actorRefFactory = system
+    override val exCtx = system.dispatcher
+    override lazy val db = getDb()
   }
 }

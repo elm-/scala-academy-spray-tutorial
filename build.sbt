@@ -21,6 +21,7 @@ libraryDependencies ++= {
   Seq(
     "io.spray" % "spray-can" % sprayVersion,
     "io.spray" % "spray-routing" % sprayVersion,
+    "io.spray" %% "spray-json" % "1.2.5",
     "com.typesafe.akka" %% "akka-actor" % akkaVersion,
     "org.reactivemongo" %% "reactivemongo" % reactiveMongoVersion,
     "io.spray" % "spray-testkit" % sprayVersion % "test",

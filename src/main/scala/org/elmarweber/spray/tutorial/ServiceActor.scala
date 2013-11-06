@@ -1,16 +1,12 @@
 package org.elmarweber.spray.tutorial
 
-import akka.actor._
-import akka.io._
-import spray.can._
 
 import akka.actor.Actor
-import spray.routing._
-import spray.http._
-import MediaTypes._
+import reactivemongo.api._
 
-class ServiceActor extends Actor with UserService {
+class ServiceActor(override protected val db: DB) extends Actor with UserService {
   def actorRefFactory = context
+  override protected val exCtx = context.dispatcher
 
   def receive = runRoute(userRoute)
 }
