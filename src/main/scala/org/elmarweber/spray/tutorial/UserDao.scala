@@ -7,7 +7,7 @@ import reactivemongo.core.commands.LastError
 import scala.concurrent.{ExecutionContext, Future}
 
 trait UserDao {
-  protected[this] val db: DefaultDB
+  protected[this] val db: DB
 
   private def users = db("User")
 
@@ -24,6 +24,12 @@ trait UserDao {
       "_id" -> user.username,
       "displayName" -> user.displayName,
       "apiKey" -> user.apiKey))
+
+  def update(user: User)(implicit ctx: ExecutionContext): Future[LastError] = users
+    .update(identity(user.username),
+      BSONDocument(
+        "displayName" -> user.displayName,
+        "apiKey" -> user.apiKey))
 
   def findOne(username: String)(implicit ctx: ExecutionContext): Future[Option[User]] = users
     .find(identity(username))

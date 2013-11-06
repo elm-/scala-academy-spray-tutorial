@@ -31,6 +31,15 @@ class UserDaoTest extends Specification with FutureTestSupport {
       findOne(NAME).await mustEqual Some(USER)
     }
 
+    "update user" in new DefaultContext {
+      insert(USER).await
+
+      val updatedUser = USER.copy(apiKey = "newKey")
+
+      update(updatedUser).await
+      findOne(NAME).await mustEqual Some(updatedUser)
+    }
+
     "list users" in new DefaultContext {
       insert(USER).await
       insert(USER_2).await
