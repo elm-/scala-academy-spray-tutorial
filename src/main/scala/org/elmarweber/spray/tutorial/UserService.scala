@@ -11,10 +11,10 @@ trait UserService extends HttpService with UserDao {
   protected[this] implicit def exCtx: ExecutionContext
 
   // TODO: use JSON format that includes text error message, etc.
-  private val lastErrorMapper : LastError => StatusCode = { _.ok match {
+  private def lastErrorMapper(error: LastError) : StatusCode = error.ok match {
     case true => StatusCodes.OK
     case false => StatusCodes.InternalServerError
-  }}
+  }
 
   val userRoute = pathPrefix("user") {
     path("") {
