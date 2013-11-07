@@ -14,7 +14,7 @@ object Boot extends App {
   val connection = driver.connection(List("localhost"))
   val db = connection("spray-tutorial")
 
-  val service = system.actorOf(Props[ServiceActor], "rest-service")
+  val service = system.actorOf(Props(new ServiceActor(db)), "rest-service")
 
   IO(Http) ! Http.Bind(service, interface = "localhost", port = 8080)
 
