@@ -21,16 +21,20 @@ libraryDependencies ++= {
   Seq(
     "io.spray" % "spray-can" % sprayVersion,
     "io.spray" % "spray-routing" % sprayVersion,
+    "io.spray" % "spray-servlet" % sprayVersion,
     "io.spray" %% "spray-json" % "1.2.5",
     "com.typesafe.akka" %% "akka-actor" % akkaVersion,
     "org.reactivemongo" %% "reactivemongo" % reactiveMongoVersion,
     "io.spray" % "spray-testkit" % sprayVersion % "test",
     "com.typesafe.akka" %% "akka-testkit" % akkaVersion % "test",
     "org.specs2" %% "specs2" % specsVersion % "test",
-    "de.flapdoodle.embed" % "de.flapdoodle.embed.mongo" % "1.40" % "test"
+    "de.flapdoodle.embed" % "de.flapdoodle.embed.mongo" % "1.40" % "test",
+    "javax.servlet" % "javax.servlet-api" % "3.0.1" % "provided",
+    "org.eclipse.jetty" % "jetty-webapp" % "8.1.10.v20130312" % "container"
   )
 }
 
 
 seq(Revolver.settings: _*)
 
+seq(webSettings :_*)
